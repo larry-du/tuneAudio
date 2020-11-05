@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="./style.css">
+    <title>document</title>
+</head>
+
+<body>
+    <div class="audio-area">
+        <figure class="tune-audio">
+            <figcaption class="song-title">尚未選取歌曲</figcaption>
+            <audio class="audio-player"></audio>
+            <button data-playing="false"
+                class="play-button">
+                <span>Play/Pause</span>
+            </button>
+            <div class="update-area">
+                <label for="update-audio"
+                    class="update-button">音源上傳</label>
+                <input type="file"
+                    accept="audio/*"
+                    class="update-audio"
+                    id="update-audio">
+            </div>
+        </figure>
+    </div>
+    <script type="module"
+        src="./index.js"></script>
+</body>
+
+</html>
