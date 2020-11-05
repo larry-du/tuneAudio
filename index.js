@@ -54,10 +54,8 @@ audioElement.addEventListener('ended', () => {
     playButton.dataset.playing = 'false';
 });
 
-updateAudio.addEventListener('input', (e) => {
-    createAudio(e)
-})
+updateAudio.addEventListener('input', (e) => createAudio(e))
 
-volumeControl.addEventListener('change', (e) => tuneVolume(e))
+volumeControl.addEventListener('input', (e) => tuneVolume(e))
 
-pannerControl.addEventListener('change', (e) => tunePanner(e));
+pannerControl.addEventListener('input', (e) => tunePanner(e));
