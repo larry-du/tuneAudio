@@ -6,19 +6,21 @@ const playButton = document.querySelector('.play-button')
 const audioElement = document.querySelector('.audio-player');
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const gainNode = audioContext.createGain();
-const oscillator = audioContext.createOscillator();
 
 const volumeControl = document.querySelector('.volume');
 const volumeText = document.querySelector('.volume-text');
 
-const detuneControl = document.querySelector('.detune');
+const pannerOptions = { pan: 0 };
+const panner = new StereoPannerNode(audioContext, pannerOptions);
+const pannerControl = document.querySelector('.panner');
+const pannerText = document.querySelector('.panner-text');
 
 function createAudio(e) {
     const blob_url = URL.createObjectURL(e.target.files[0]);
     songTitle.innerText = `${e.target.files[0].name}`;
     audioPlayer.setAttribute('src', `${blob_url}`);
     const track = audioContext.createMediaElementSource(audioElement);
-    track.connect(oscillator).connect(gainNode).connect(audioContext.destination);
+    track.connect(gainNode).connect(panner).connect(audioContext.destination);
 }
 
 function playingSound() {
@@ -40,9 +42,10 @@ function tuneVolume(e) {
     volumeText.innerText = `Volume : ${volume}`;
 }
 
-function tuneDetune(e) {
-    console.log(oscillator);
-    const detune = e.target.value;
+function tunePanner(e) {
+    const pannerValue = e.target.value;
+    panner.pan.value = pannerValue;
+    pannerText.innerText = `panner : ${pannerValue}`;
 }
 
 playButton.addEventListener('click', playingSound);
@@ -56,4 +59,5 @@ updateAudio.addEventListener('input', (e) => {
 })
 
 volumeControl.addEventListener('change', (e) => tuneVolume(e))
-detuneControl.addEventListener('change', (e) => tuneDetune(e))
+
+pannerControl.addEventListener('change', (e) => tunePanner(e));
